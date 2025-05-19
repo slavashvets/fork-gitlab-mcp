@@ -44,6 +44,11 @@ from src.services.merge_requests import (
     merge_request_changes,
     update_merge_request,
 )
+from src.services.pipelines import (
+    get_latest_pipeline,
+    get_single_pipeline,
+    list_project_pipelines,
+)
 from src.services.repositories import create_repository, list_repository_tree
 from src.services.search import search_globally, search_group, search_project
 
@@ -172,6 +177,20 @@ mcp.tool(
 mcp.tool(
     name="create_merge_request_comment", description="Add a comment to a merge request."
 )(create_merge_request_comment)
+
+# Register pipeline tools
+mcp.tool(
+    name="list_project_pipelines",
+    description="List pipelines in a GitLab project.",
+)(list_project_pipelines)
+mcp.tool(
+    name="get_single_pipeline",
+    description="Get a single pipeline by ID for a GitLab project.",
+)(get_single_pipeline)
+mcp.tool(
+    name="get_latest_pipeline",
+    description="Get the latest pipeline for the most recent commit on a specific ref.",
+)(get_latest_pipeline)
 
 # Register job tools
 
